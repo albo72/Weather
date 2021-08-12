@@ -1,10 +1,10 @@
 package weather.albo;
 
 public class TemperatureUpdater implements Runnable {
-    public static final String CURRENT_TEMP_TEMPLATE = "Текущая температура в %s: %d°C.";
+    private static final String CURRENT_TEMP_TEMPLATE = "Текущая температура в %s: %d°C.";
     private final String town;
-    private Integer currentTemperature;
-    private Integer previousTemperature;
+    private final Integer currentTemperature;
+    private final Integer previousTemperature;
 
     public TemperatureUpdater(String town, Integer currentTemperature, Integer previousTemperature) {
         this.town = town;
