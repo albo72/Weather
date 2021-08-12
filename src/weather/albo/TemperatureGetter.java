@@ -1,8 +1,7 @@
 package weather.albo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.net.URISyntaxException;
 
 public class TemperatureGetter {
 
@@ -12,6 +11,8 @@ public class TemperatureGetter {
             BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Alex\\Desktop\\Java\\Weather\\resources\\" + town + ".txt"));
             temperature = Integer.parseInt(reader.readLine());
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
