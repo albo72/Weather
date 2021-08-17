@@ -3,7 +3,7 @@ package weather.albo;
 public class TemperatureUpdater implements Runnable {
     private static final String CURRENT_TEMP_TEMPLATE = "Текущая температура в %s: %d°C.";
     private final String town;
-    private PreviousTemperatureDataBase previousTemperatureDataBase;
+    private final PreviousTemperatureDataBase previousTemperatureDataBase;
 
     public TemperatureUpdater(String town, PreviousTemperatureDataBase previousTemperatureDataBase) {
         this.town = town;
@@ -13,10 +13,11 @@ public class TemperatureUpdater implements Runnable {
     @Override
     public void run() {
         TemperatureGetter temperatureGetter = new TemperatureGetter();
-        Integer previousTemperature = previousTemperatureDataBase.getMapWithPreviousTemperature().get(town);
+        var mapWithPreviousTemperature = previousTemperatureDataBase.getMapWithPreviousTemperature();
+        Integer previousTemperature = mapWithPreviousTemperature.get(town);
         Integer currentTemperature = temperatureGetter.getTemperature(town);
         checkPreviousValueAndOutput(previousTemperature, currentTemperature, town);
-        previousTemperatureDataBase.getMapWithPreviousTemperature().put(town,currentTemperature);
+        mapWithPreviousTemperature.put(town,currentTemperature);
     }
 
     private void checkPreviousValueAndOutput(Integer previousTemperature, int currentTemperature, String city) {
